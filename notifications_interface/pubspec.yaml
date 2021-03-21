@@ -1,0 +1,10 @@
+name: notifications_interface
+description: An simple interface to show notifications in a loosely coupled manner.
+version: 0.1.0
+author: Pavel Sulimau
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+  
+dependencies:
+  equatable: ^2.0.0
