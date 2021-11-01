@@ -2,7 +2,6 @@ name: notifications_implementation
 description: An implementation of 'notifications_interface' which helps in
   working with notifications a loosely coupled manner.
 version: 0.0.1
-author: Pavel Sulimau
 publish_to: none
 
 environment:
@@ -13,10 +12,12 @@ dependencies:
   flutter:
     sdk: flutter
   notifications_interface:
-    path: '../notifications_interface/'
-  overlay_support: ^1.2.0
-
+    git:
+      url: https://github.com/Pavel-Sulimau/light_notifications.git
+      path: notifications_interface
+    # path: '../notifications_interface/'
+  overlay_support: ^1.2.1
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  stanalysis:
+    git: https://github.com/Pavel-Sulimau/stanalysis.git

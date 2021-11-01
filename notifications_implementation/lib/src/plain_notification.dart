@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Notification;
 import 'package:notifications_interface/notifications_interface.dart';
 
 class PlainNotification extends StatelessWidget {
@@ -7,7 +7,7 @@ class PlainNotification extends StatelessWidget {
     required this.notification,
   }) : super(key: key);
 
-  final AppNotification notification;
+  final Notification notification;
 
   @override
   Widget build(BuildContext context) {

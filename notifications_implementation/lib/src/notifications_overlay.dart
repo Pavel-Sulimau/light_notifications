@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Notification;
 import 'package:notifications_interface/notifications_interface.dart';
 import 'package:overlay_support/overlay_support.dart';
 
@@ -23,7 +23,7 @@ class NotificationOverlay extends StatefulWidget {
 }
 
 class _NotificationOverlayState extends State<NotificationOverlay> {
-  late StreamSubscription<AppNotification> _notificationsSubscription;
+  late StreamSubscription<Notification> _notificationsSubscription;
 
   @override
   void initState() {
@@ -44,28 +44,33 @@ class _NotificationOverlayState extends State<NotificationOverlay> {
         ),
       );
 
-  void _showNotification(AppNotification appNotification) {
+  void _showNotification(Notification appNotification) {
     late OverlaySupportEntry overlay;
 
     final strategy = widget.notificationUIStrategy(appNotification);
 
     overlay = showOverlay(
       (context, t) {
-        final notification = BottomSlideNotification(
-          builder: (context) => strategy.widgetBuilder(context),
-          progress: t,
-        );
-
         final showAtTop = strategy.settings.place == NotificationPlace.top;
+
+        final notification = showAtTop
+            ? TopSlideNotification(
+                builder: (context) => strategy.widgetBuilder(context),
+                progress: t,
+              )
+            : BottomSlideNotification(
+                builder: (context) => strategy.widgetBuilder(context),
+                progress: t,
+              );
 
         return Stack(
           children: [
-            Positioned.fill(
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: appNotification.dismissible ? () => overlay.dismiss() : null,
+            if (!appNotification.dismissible)
+              Positioned.fill(
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                ),
               ),
-            ),
             Positioned(
               left: 0.0,
               top: showAtTop ? 0.0 : null,

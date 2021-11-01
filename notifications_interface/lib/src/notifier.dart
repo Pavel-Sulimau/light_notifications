@@ -7,17 +7,17 @@ class Notifier {
   Notifier._();
 
   static final Notifier _instance = Notifier._();
-  final _notificationStreamController = StreamController<AppNotification>.broadcast();
+  final _notificationStreamController = StreamController<Notification>.broadcast();
 
-  Stream<AppNotification> get notifications => _notificationStreamController.stream;
+  Stream<Notification> get notifications => _notificationStreamController.stream;
 
-  void send(AppNotification notification) => _notificationStreamController.add(notification);
+  void send(Notification notification) => _notificationStreamController.add(notification);
 
   void dispose() => _notificationStreamController.close();
 }
 
-class AppNotification extends Equatable {
-  const AppNotification({
+class Notification extends Equatable {
+  const Notification({
     required this.level,
     required this.text,
     this.dismissible = true,
