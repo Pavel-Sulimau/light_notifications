@@ -3,8 +3,8 @@ description: A simple API to show notifications in a loosely coupled manner.
 version: 0.1.0
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
-  
+  sdk: ">=2.17.0 <3.0.0"
+
 dependencies:
   equatable: ^2.0.3
 
